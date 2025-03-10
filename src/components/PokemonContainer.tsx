@@ -28,16 +28,20 @@ const PokemonData = ({ identifier }: PokemonContainerProps) => {
 };
 
 const PokemonErrorFallback = (error: Error) => (
-  <div style={{ color: "red", padding: "1rem" }}>
-    エラーが発生しました: {error.message}
-  </div>
+  <div className="text-red-600 p-4">エラーが発生しました: {error.message}</div>
 );
 
 export const PokemonContainer = ({ identifier }: PokemonContainerProps) => {
   return (
     <div className="w-[120px] h-[120px] bg-white rounded-lg shadow-sm p-2 flex flex-col items-center justify-between transition-transform hover:translate-y-[-2px] cursor-pointer">
       <ErrorBoundary fallback={PokemonErrorFallback}>
-        <Suspense fallback={<div className="p-4 text-center bg-gray-50 rounded-lg text-gray-700">Loading...</div>}>
+        <Suspense
+          fallback={
+            <div className="p-4 text-center bg-gray-50 rounded-lg text-gray-700">
+              Loading...
+            </div>
+          }
+        >
           <PokemonData identifier={identifier} />
         </Suspense>
       </ErrorBoundary>

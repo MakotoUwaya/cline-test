@@ -12,7 +12,9 @@ export const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
         alt={pokemon.name}
         className="w-20 h-20 object-contain"
       />
-      <p className="m-0 text-sm capitalize text-center w-full truncate">{pokemon.name}</p>
+      <p className="m-0 text-sm capitalize text-center w-full truncate">
+        {pokemon.name}
+      </p>
     </div>
   );
 };

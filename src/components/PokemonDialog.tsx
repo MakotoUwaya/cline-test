@@ -37,7 +37,9 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
           alt={pokemon.name}
           className="block w-[120px] h-[120px] mx-auto"
         />
-        <h2 className="mt-2 mb-2 text-center capitalize text-gray-800">{pokemon.name}</h2>
+        <h2 className="mt-2 mb-2 text-center capitalize text-gray-800">
+          {pokemon.name}
+        </h2>
         <div className="mt-4">
           <p className="text-gray-700 my-2">Height: {pokemon.height / 10}m</p>
           <p className="text-gray-700 my-2">Weight: {pokemon.weight / 10}kg</p>
@@ -45,7 +47,10 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
             <h3 className="mt-4 mb-2 text-gray-600">Types:</h3>
             <ul>
               {pokemon.types.map((type) => (
-                <li key={type.type.name} className="inline-block m-1 px-3 py-1 bg-gray-100 rounded-full text-gray-700">
+                <li
+                  key={type.type.name}
+                  className="inline-block m-1 px-3 py-1 bg-gray-100 rounded-full text-gray-700"
+                >
                   {type.type.name}
                 </li>
               ))}
@@ -55,7 +60,10 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
             <h3 className="mt-4 mb-2 text-gray-600">Abilities:</h3>
             <ul>
               {pokemon.abilities.map((ability) => (
-                <li key={ability.ability.name} className="inline-block m-1 px-3 py-1 bg-gray-100 rounded-full text-gray-700">
+                <li
+                  key={ability.ability.name}
+                  className="inline-block m-1 px-3 py-1 bg-gray-100 rounded-full text-gray-700"
+                >
                   {ability.ability.name}
                   {ability.is_hidden && " (Hidden)"}
                 </li>
