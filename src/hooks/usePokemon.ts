@@ -1,35 +1,26 @@
-import { useState, useEffect } from "react";
+import { use } from "react";
 import type { Pokemon } from "../types/pokemon";
 
-export const usePokemon = (pokemonName: string) => {
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
+const cache = new Map<string, Promise<Pokemon>>();
 
-  useEffect(() => {
-    const fetchPokemon = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+const fetchPokemon = (pokemonName: string): Promise<Pokemon> => {
+  if (!cache.has(pokemonName)) {
+    cache.set(
+      pokemonName,
+      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`).then(
+        async (response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
         }
-        const data = await response.json();
-        setPokemon(data);
-      } catch (err) {
-        setError(
-          err instanceof Error ? err : new Error("Failed to fetch pokemon")
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
+      )
+    );
+  }
 
-    void fetchPokemon();
-  }, [pokemonName]);
+  return cache.get(pokemonName)!;
+};
 
-  return { pokemon, isLoading, error };
+export const usePokemon = (pokemonName: string): Pokemon => {
+  return use(fetchPokemon(pokemonName));
 };

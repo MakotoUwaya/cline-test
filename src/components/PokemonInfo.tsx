@@ -1,28 +1,10 @@
 import type { Pokemon } from "../types/pokemon";
 
 interface PokemonInfoProps {
-  pokemon: Pokemon | null;
-  isLoading: boolean;
-  error: Error | null;
+  pokemon: Pokemon;
 }
 
-export const PokemonInfo = ({
-  pokemon,
-  isLoading,
-  error,
-}: PokemonInfoProps) => {
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  if (!pokemon) {
-    return null;
-  }
-
+export const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
   return (
     <div>
       <h1>{pokemon.name} Information</h1>
