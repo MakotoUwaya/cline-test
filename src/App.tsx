@@ -16,9 +16,9 @@ function App() {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
   useEffect(() => {
-    axios.get('https://pokeapi.co/api/v2/pokemon/pikachu')
-      .then(response => setPokemon(response.data))
-      .catch(error => console.error(error));
+    axios.get<Pokemon>('https://pokeapi.co/api/v2/pokemon/pikachu')
+      .then((response: { data: Pokemon }) => setPokemon(response.data))
+      .catch((error: Error) => console.error(error));
   }, []);
 
   return (
