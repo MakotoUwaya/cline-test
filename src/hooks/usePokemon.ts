@@ -18,7 +18,11 @@ const fetchPokemon = (pokemonName: string): Promise<Pokemon> => {
     );
   }
 
-  return cache.get(pokemonName)!;
+  const pokemon = cache.get(pokemonName);
+  if (!pokemon) {
+    throw new Error("Pokemon not found in cache");
+  }
+  return pokemon;
 };
 
 export const usePokemon = (pokemonName: string): Pokemon => {
