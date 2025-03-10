@@ -24,7 +24,7 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
   return (
     <dialog
       ref={dialogRef}
-      className="border-none rounded-lg p-0 max-w-md w-[90%] bg-white backdrop:bg-black/50"
+      className="border-none rounded-lg p-0 max-w-md w-[90%] bg-white backdrop:bg-black/50 fixed inset-0 m-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
