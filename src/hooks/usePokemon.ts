@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import type { Pokemon } from "../types/pokemon";
 
 export const usePokemon = (pokemonName: string) => {
@@ -12,10 +11,14 @@ export const usePokemon = (pokemonName: string) => {
       setIsLoading(true);
       setError(null);
       try {
-        const response = await axios.get(
+        const response = await fetch(
           `https://pokeapi.co/api/v2/pokemon/${pokemonName}`
         );
-        setPokemon(response.data);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setPokemon(data);
       } catch (err) {
         setError(
           err instanceof Error ? err : new Error("Failed to fetch pokemon")
