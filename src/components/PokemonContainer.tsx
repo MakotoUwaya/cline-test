@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { ErrorBoundary } from "./ErrorBoundary";
-import { PokemonInfo } from "./PokemonInfo";
-import { usePokemon } from "../hooks/usePokemon";
+import { PokemonInfo } from "@/components/PokemonInfo";
+import { usePokemon } from "@/hooks/usePokemon";
 
 const PokemonData = () => {
   const pokemon = usePokemon("pikachu");

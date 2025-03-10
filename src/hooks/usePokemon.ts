@@ -1,5 +1,5 @@
 import { use } from "react";
-import type { Pokemon } from "../types/pokemon";
+import type { Pokemon } from "@/types/pokemon";
 
 const cache = new Map<string, Promise<Pokemon>>();
 

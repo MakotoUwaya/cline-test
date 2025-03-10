@@ -1,6 +1,6 @@
-import reactLogo from "./assets/react.svg";
-import "./App.css";
-import { PokemonContainer } from "./components/PokemonContainer";
+import reactLogo from "@/assets/react.svg";
+import "@/App.css";
+import { PokemonContainer } from "@/components/PokemonContainer";
 
 const App = () => {
   return (
