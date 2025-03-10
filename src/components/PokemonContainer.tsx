@@ -1,6 +1,7 @@
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 import { ErrorBoundary } from "./ErrorBoundary";
 import { PokemonInfo } from "@/components/PokemonInfo";
+import { PokemonDialog } from "@/components/PokemonDialog";
 import { usePokemon } from "@/hooks/usePokemon";
 
 interface PokemonContainerProps {
@@ -8,8 +9,22 @@ interface PokemonContainerProps {
 }
 
 const PokemonData = ({ identifier }: PokemonContainerProps) => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const pokemon = usePokemon(identifier.toString());
-  return <PokemonInfo pokemon={pokemon} />;
+
+  return (
+    <>
+      <div onClick={() => setIsDialogOpen(true)}>
+        <PokemonInfo pokemon={pokemon} />
+      </div>
+      {isDialogOpen && (
+        <PokemonDialog
+          pokemon={pokemon}
+          onClose={() => setIsDialogOpen(false)}
+        />
+      )}
+    </>
+  );
 };
 
 const PokemonErrorFallback = (error: Error) => (
