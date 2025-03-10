@@ -19,7 +19,7 @@ export const PokemonGrid = () => {
   }
 
   return (
-    <div className="grid grid-cols-[repeat(auto-fill,120px)] gap-4 p-8 justify-center max-w-7xl mx-auto">
+    <div className="grid grid-cols-3 sm:grid-cols-[repeat(auto-fill,120px)] gap-2 sm:gap-4 py-8 px-1 sm:p-8 justify-center max-w-7xl mx-auto">
       {pokemons.map((pokemon, index) => {
         const id = pokemon.url.split("/").filter(Boolean).pop();
         const isLastElement = index === pokemons.length - 1;

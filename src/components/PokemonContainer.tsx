@@ -33,7 +33,7 @@ const PokemonErrorFallback = (error: Error) => (
 
 export const PokemonContainer = ({ identifier }: PokemonContainerProps) => {
   return (
-    <div className="w-[120px] h-[120px] bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:shadow-gray-700/20 p-2 flex flex-col items-center justify-between transition-transform hover:translate-y-[-2px] cursor-pointer">
+    <div className="w-full sm:w-[120px] aspect-square bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:shadow-gray-700/20 p-2 flex flex-col items-center justify-between transition-transform hover:translate-y-[-2px] cursor-pointer">
       <ErrorBoundary fallback={PokemonErrorFallback}>
         <Suspense
           fallback={
