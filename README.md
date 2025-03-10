@@ -1,6 +1,6 @@
-# React + TypeScript + Vite
+# CLINE Test
 
-このテンプレートは、Vite で React を使用するための最小限のセットアップを提供し、HMR と Biome によるコード整形を含んでいます。
+このプロジェクトは、Vite で React と TypeScript を使用したポケモン図鑑アプリケーションです。Biome によるコード整形とリントを含んでいます。
 
 現在、2 つの公式プラグインが利用可能です:
 
