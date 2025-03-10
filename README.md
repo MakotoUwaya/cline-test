@@ -26,9 +26,6 @@ npm run format
 
 # Biome でコードの問題をチェックする
 npm run lint
-
-# TypeScript の型チェックを実行する
-npm run typecheck
 ```
 
 ## Biome の設定
