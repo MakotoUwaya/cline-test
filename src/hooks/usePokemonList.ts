@@ -1,39 +1,65 @@
-import { use } from "react";
+import { useState, useCallback, useEffect } from "react";
+
+interface Pokemon {
+  name: string;
+  url: string;
+}
 
 interface PokemonListResponse {
   count: number;
   next: string | null;
   previous: string | null;
-  results: Array<{
-    name: string;
-    url: string;
-  }>;
+  results: Pokemon[];
 }
 
-const cache = new Map<number, Promise<PokemonListResponse>>();
+const LIMIT = 25;
 
-const fetchPokemonList = (offset: number): Promise<PokemonListResponse> => {
-  if (!cache.has(offset)) {
-    cache.set(
-      offset,
-      fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=25`).then(
-        async (response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        }
-      )
-    );
-  }
+export const usePokemonList = (initialFetch = true) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [offset, setOffset] = useState(0);
 
-  const pokemonList = cache.get(offset);
-  if (!pokemonList) {
-    throw new Error("Pokemon list not found in cache");
-  }
-  return pokemonList;
-};
+  const loadMore = useCallback(async () => {
+    if (loading || !hasMore) return;
 
-export const usePokemonList = (offset: number): PokemonListResponse => {
-  return use(fetchPokemonList(offset));
+    try {
+      setLoading(true);
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${LIMIT}`
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data: PokemonListResponse = await response.json();
+      setPokemons((prev) => [...prev, ...data.results]);
+      setHasMore(data.next !== null);
+      setOffset((prev) => prev + LIMIT);
+      setError(null);
+    } catch (err) {
+      setError(
+        err instanceof Error ? err : new Error("Failed to fetch Pokemon list")
+      );
+    } finally {
+      setLoading(false);
+    }
+  }, [offset, loading, hasMore]);
+
+  // 初期データの取得
+  useEffect(() => {
+    if (initialFetch && !pokemons.length) {
+      loadMore();
+    }
+  }, [initialFetch, loadMore, pokemons.length]);
+
+  return {
+    pokemons,
+    loading,
+    error,
+    hasMore,
+    loadMore,
+  };
 };
