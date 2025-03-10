@@ -3,7 +3,7 @@ import "./App.css";
 import { PokemonInfo } from "./components/PokemonInfo";
 import { usePokemon } from "./hooks/usePokemon";
 
-function App() {
+const App = () => {
   const { pokemon, isLoading, error } = usePokemon("pikachu");
 
   return (
@@ -19,6 +19,6 @@ function App() {
       </p>
     </>
   );
-}
+};
 
 export default App;
