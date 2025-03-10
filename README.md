@@ -1,6 +1,6 @@
 # React + TypeScript + Vite
 
-このテンプレートは、Vite で React を使用するための最小限のセットアップを提供し、HMR と ESLint ルールを含んでいます。
+このテンプレートは、Vite で React を使用するための最小限のセットアップを提供し、HMR と Biome によるコード整形を含んでいます。
 
 現在、2 つの公式プラグインが利用可能です:
 
@@ -21,58 +21,25 @@ npm run build
 # ローカルで本番ビルドをプレビューする
 npm run preview
 
-# ESLint でコードの問題をチェックする
+# Biome でコードをフォーマットする
+npm run format
+
+# Biome でコードの問題をチェックする
 npm run lint
 
 # TypeScript の型チェックを実行する
 npm run typecheck
 ```
 
-## ESLint 設定の拡張
+## Biome の設定
 
-本番アプリケーションを開発している場合は、型を認識する lint ルールを有効にするために設定を更新することをお勧めします:
+本プロジェクトでは、コードの整形とリントに [Biome](https://biomejs.dev/) を使用しています。Biome は高速で設定が簡単な JavaScript/TypeScript のツールチェインです。
 
-```js
-export default tseslint.config({
-  extends: [
-    // ...tseslint.configs.recommended を削除して以下に置き換え
-    ...tseslint.configs.recommendedTypeChecked,
-    // または、より厳格なルールを使用
-    ...tseslint.configs.strictTypeChecked,
-    // オプションで、スタイルに関するルールを追加
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // その他のオプション...
-    parserOptions: {
-      project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-});
-```
+設定は `biome.json` で管理されており、以下のような機能が有効になっています:
 
-また、React 固有の lint ルールのために [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) と [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) をインストールすることもできます:
-
-```js
-// eslint.config.js
-import reactX from "eslint-plugin-react-x";
-import reactDom from "eslint-plugin-react-dom";
-
-export default tseslint.config({
-  plugins: {
-    // react-x と react-dom プラグインを追加
-    "react-x": reactX,
-    "react-dom": reactDom,
-  },
-  rules: {
-    // その他のルール...
-    // 推奨 TypeScript ルールを有効化
-    ...reactX.configs["recommended-typescript"].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-});
-```
+- コードフォーマット
+- リント
+- インポートの整理
 
 ## プロジェクトセットアップ
 
