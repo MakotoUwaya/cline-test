@@ -3,21 +3,29 @@ import { ErrorBoundary } from "./ErrorBoundary";
 import { PokemonInfo } from "@/components/PokemonInfo";
 import { usePokemon } from "@/hooks/usePokemon";
 
-const PokemonData = () => {
-  const pokemon = usePokemon("pikachu");
+interface PokemonContainerProps {
+  identifier: string | number;
+}
+
+const PokemonData = ({ identifier }: PokemonContainerProps) => {
+  const pokemon = usePokemon(identifier.toString());
   return <PokemonInfo pokemon={pokemon} />;
 };
 
 const PokemonErrorFallback = (error: Error) => (
-  <div style={{ color: "red" }}>エラーが発生しました: {error.message}</div>
+  <div style={{ color: "red", padding: "1rem" }}>
+    エラーが発生しました: {error.message}
+  </div>
 );
 
-export const PokemonContainer = () => {
+export const PokemonContainer = ({ identifier }: PokemonContainerProps) => {
   return (
-    <ErrorBoundary fallback={PokemonErrorFallback}>
-      <Suspense fallback={<div>Loading...</div>}>
-        <PokemonData />
-      </Suspense>
-    </ErrorBoundary>
+    <div className="pokemon-card">
+      <ErrorBoundary fallback={PokemonErrorFallback}>
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+          <PokemonData identifier={identifier} />
+        </Suspense>
+      </ErrorBoundary>
+    </div>
   );
 };

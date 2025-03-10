@@ -1,20 +1,11 @@
-import reactLogo from "@/assets/react.svg";
-import "@/App.css";
-import { PokemonContainer } from "@/components/PokemonContainer";
+import { PokemonGrid } from "@/components/PokemonGrid";
+import "@/styles/pokemon.css";
 
 const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <PokemonContainer />
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <main style={{ minHeight: "100vh", background: "#f0f0f0" }}>
+      <PokemonGrid offset={0} />
+    </main>
   );
 };
 
