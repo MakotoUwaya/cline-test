@@ -36,7 +36,7 @@ export const PokemonGrid = ({ offset }: PokemonGridProps) => {
     <ErrorBoundary fallback={GridErrorFallback}>
       <Suspense
         fallback={
-          <div className="p-8 text-center text-gray-700">
+          <div className="p-8 text-center text-gray-700 dark:text-gray-300">
             ポケモン一覧を読み込み中...
           </div>
         }
