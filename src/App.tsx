@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
-import axios from 'axios'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import axios from "axios";
+import reactLogo from "./assets/react.svg";
+import "./App.css";
 
 function App() {
   interface Pokemon {
@@ -16,7 +16,8 @@ function App() {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
   useEffect(() => {
-    axios.get<Pokemon>('https://pokeapi.co/api/v2/pokemon/pikachu')
+    axios
+      .get<Pokemon>("https://pokeapi.co/api/v2/pokemon/pikachu")
       .then((response: { data: Pokemon }) => setPokemon(response.data))
       .catch((error: Error) => console.error(error));
   }, []);
@@ -39,7 +40,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
