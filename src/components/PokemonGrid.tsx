@@ -11,7 +11,7 @@ const PokemonList = ({ offset }: PokemonGridProps) => {
   const { results } = usePokemonList(offset);
 
   return (
-    <div className="pokemon-grid">
+    <div className="grid grid-cols-[repeat(auto-fill,120px)] gap-4 p-8 justify-center max-w-7xl mx-auto">
       {results.map((pokemon) => {
         const id = pokemon.url.split("/").filter(Boolean).pop();
         return (
@@ -26,7 +26,7 @@ const PokemonList = ({ offset }: PokemonGridProps) => {
 };
 
 const GridErrorFallback = (error: Error) => (
-  <div style={{ color: "red", padding: "2rem", textAlign: "center" }}>
+  <div className="text-red-600 p-8 text-center">
     ポケモンの一覧を取得できませんでした: {error.message}
   </div>
 );
@@ -36,7 +36,7 @@ export const PokemonGrid = ({ offset }: PokemonGridProps) => {
     <ErrorBoundary fallback={GridErrorFallback}>
       <Suspense
         fallback={
-          <div style={{ padding: "2rem", textAlign: "center" }}>
+          <div className="p-8 text-center text-gray-700">
             ポケモン一覧を読み込み中...
           </div>
         }

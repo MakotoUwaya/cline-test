@@ -24,36 +24,38 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
   return (
     <dialog
       ref={dialogRef}
-      className="pokemon-dialog"
+      className="border-none rounded-lg p-0 max-w-md w-[90%] bg-white backdrop:bg-black/50"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           onClose();
         }
       }}
     >
-      <div className="pokemon-dialog-content">
+      <div className="p-6">
         <img
           src={pokemon.sprites.front_default}
           alt={pokemon.name}
-          className="pokemon-image"
+          className="block w-[120px] h-[120px] mx-auto"
         />
-        <h2>{pokemon.name}</h2>
-        <div className="pokemon-details">
-          <p>Height: {pokemon.height / 10}m</p>
-          <p>Weight: {pokemon.weight / 10}kg</p>
-          <div className="pokemon-types">
-            <h3>Types:</h3>
+        <h2 className="mt-2 mb-2 text-center capitalize text-gray-800">{pokemon.name}</h2>
+        <div className="mt-4">
+          <p className="text-gray-700 my-2">Height: {pokemon.height / 10}m</p>
+          <p className="text-gray-700 my-2">Weight: {pokemon.weight / 10}kg</p>
+          <div>
+            <h3 className="mt-4 mb-2 text-gray-600">Types:</h3>
             <ul>
               {pokemon.types.map((type) => (
-                <li key={type.type.name}>{type.type.name}</li>
+                <li key={type.type.name} className="inline-block m-1 px-3 py-1 bg-gray-100 rounded-full text-gray-700">
+                  {type.type.name}
+                </li>
               ))}
             </ul>
           </div>
-          <div className="pokemon-abilities">
-            <h3>Abilities:</h3>
+          <div>
+            <h3 className="mt-4 mb-2 text-gray-600">Abilities:</h3>
             <ul>
               {pokemon.abilities.map((ability) => (
-                <li key={ability.ability.name}>
+                <li key={ability.ability.name} className="inline-block m-1 px-3 py-1 bg-gray-100 rounded-full text-gray-700">
                   {ability.ability.name}
                   {ability.is_hidden && " (Hidden)"}
                 </li>
@@ -61,7 +63,10 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
             </ul>
           </div>
         </div>
-        <button onClick={onClose} className="close-button">
+        <button
+          onClick={onClose}
+          className="block mx-auto mt-6 px-8 py-2 bg-gray-100 border-none rounded text-gray-700 cursor-pointer transition-colors hover:bg-gray-200"
+        >
           Close
         </button>
       </div>

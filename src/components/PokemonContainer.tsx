@@ -35,9 +35,9 @@ const PokemonErrorFallback = (error: Error) => (
 
 export const PokemonContainer = ({ identifier }: PokemonContainerProps) => {
   return (
-    <div className="pokemon-card">
+    <div className="w-[120px] h-[120px] bg-white rounded-lg shadow-sm p-2 flex flex-col items-center justify-between transition-transform hover:translate-y-[-2px] cursor-pointer">
       <ErrorBoundary fallback={PokemonErrorFallback}>
-        <Suspense fallback={<div className="loading">Loading...</div>}>
+        <Suspense fallback={<div className="p-4 text-center bg-gray-50 rounded-lg text-gray-700">Loading...</div>}>
           <PokemonData identifier={identifier} />
         </Suspense>
       </ErrorBoundary>
