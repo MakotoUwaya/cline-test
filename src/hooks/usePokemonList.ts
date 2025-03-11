@@ -51,6 +51,7 @@ export const usePokemonList = (initialFetch = true) => {
   // 初期データの取得
   useEffect(() => {
     if (initialFetch && !pokemons.length) {
+      initialFetch = false;
       loadMore();
     }
   }, [initialFetch, loadMore, pokemons.length]);
