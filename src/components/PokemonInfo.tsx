@@ -12,7 +12,10 @@ export const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
         alt={pokemon.name}
         className="w-20 h-20 object-contain"
       />
-      <p className="m-0 text-sm capitalize text-center w-full truncate text-gray-800 dark:text-gray-200">
+      <p
+        className="m-0 text-sm capitalize text-center w-full max-w-[100px] truncate text-gray-800 dark:text-gray-200"
+        title={pokemon.name}
+      >
         {pokemon.name}
       </p>
     </div>
