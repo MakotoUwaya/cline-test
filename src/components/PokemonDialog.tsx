@@ -12,14 +12,17 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
   useEffect(() => {
     const dialog = dialogRef.current;
     if (dialog) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       dialog.showModal();
       document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
     }
     return () => {
       if (dialog && dialog.open) {
         dialog.close();
       }
       document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
     };
   }, []);
 
