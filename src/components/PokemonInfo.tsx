@@ -1,4 +1,5 @@
 import type { Pokemon } from "@/types/pokemon";
+import fallbackPokemon from "@/assets/pokemon-svgrepo-com.svg";
 
 interface PokemonInfoProps {
   pokemon: Pokemon;
@@ -8,7 +9,7 @@ export const PokemonInfo = ({ pokemon }: PokemonInfoProps) => {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       <img
-        src={pokemon.sprites.front_default}
+        src={pokemon.sprites.front_default ?? fallbackPokemon}
         alt={pokemon.name}
         className="w-20 h-20 object-contain"
       />

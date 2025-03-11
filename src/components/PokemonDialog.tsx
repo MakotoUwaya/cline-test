@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import type { Pokemon } from "@/types/pokemon";
+import fallbackPokemon from "@/assets/pokemon-svgrepo-com.svg";
 
 interface PokemonDialogProps {
   pokemon: Pokemon;
@@ -38,7 +39,7 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
     >
       <div className="p-6">
         <img
-          src={pokemon.sprites.front_default}
+          src={pokemon.sprites.front_default ?? fallbackPokemon}
           alt={pokemon.name}
           className="block w-[120px] h-[120px] mx-auto"
         />
