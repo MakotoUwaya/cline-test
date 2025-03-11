@@ -13,11 +13,13 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
     const dialog = dialogRef.current;
     if (dialog) {
       dialog.showModal();
+      document.body.style.overflow = 'hidden';
     }
     return () => {
       if (dialog && dialog.open) {
         dialog.close();
       }
+      document.body.style.overflow = '';
     };
   }, []);
 
