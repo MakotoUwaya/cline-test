@@ -10,6 +10,7 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: ["./src/test/setup.ts"],
+    silent: true,
     exclude: [...configDefaults.exclude, "e2e/*"],
     coverage: {
       reporter: ["text", "lcov"],
