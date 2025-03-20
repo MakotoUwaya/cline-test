@@ -20,7 +20,7 @@ export interface Pokemon {
   height: number;
   weight: number;
   sprites: {
-    front_default: string;
+    front_default: string | null;
   };
   types: PokemonType[];
   abilities: PokemonAbility[];
