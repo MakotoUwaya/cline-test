@@ -19,17 +19,20 @@ export const PokemonDialog = ({ pokemon, onClose }: PokemonDialogProps) => {
       document.body.style.paddingRight = `${scrollbarWidth}px`;
     }
     return () => {
-      if (dialog && dialog.open) {
+      if (dialog?.open) {
         dialog.close();
+        onClose();
       }
       document.body.style.overflow = '';
       document.body.style.paddingRight = '';
     };
-  }, []);
+  }, [onClose]);
 
   return (
     <dialog
       ref={dialogRef}
+      role="dialog"
+      aria-modal="true"
       className="border-none rounded-lg p-0 max-w-md w-[90%] bg-white dark:bg-gray-800 backdrop:bg-black/50 fixed inset-0 m-auto"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
