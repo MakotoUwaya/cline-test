@@ -1,4 +1,10 @@
 import "@testing-library/jest-dom";
+import { vi } from "vitest";
+
+// SVGファイルのモック
+vi.mock("@/assets/pokemon-svgrepo-com.svg", () => ({
+  default: "mocked-fallback-image-url",
+}));
 import { expect, afterEach } from "vitest";
 import { cleanup } from "@testing-library/react";
 import * as matchers from "@testing-library/jest-dom/matchers";
